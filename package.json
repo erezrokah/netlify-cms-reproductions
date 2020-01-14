@@ -1,0 +1,30 @@
+{
+  "name": "netlify-cms-reproductions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Erez Rokah",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/erezrokah/netlify-cms-reproductions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/erezrokah/netlify-cms-reproductions/issues"
+  },
+  "homepage": "https://github.com/erezrokah/netlify-cms-reproductions#readme",
+  "description": "",
+  "devDependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "husky": "^4.0.7",
+    "prettier": "^1.17.1"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}

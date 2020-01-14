@@ -8,19 +8,80 @@
   <body>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
-      var PostPreview = createClass({
-        render: function() {
-          var entry = this.props.entry;
-          return h(
-            'div',
-            {},
-            h('div', { className: 'cover' }, h('h1', {}, entry.getIn(['data', 'title']))),
-            h('p', {}, h('small', {}, 'Written ' + entry.getIn(['data', 'date']))),
-            h('div', { className: 'text' }, this.props.widgetFor('body')),
+      CMS.registerEditorComponent({
+        id: 'button',
+        label: 'Button',
+        pattern: '^{% button(.*)',
+        fields: [
+          {
+            name: 'text',
+            label: 'Text',
+            widget: 'string',
+            required: true,
+          },
+          {
+            name: 'href',
+            label: 'href',
+            widget: 'string',
+            required: true,
+          },
+          {
+            name: 'icon',
+            label: 'Icon',
+            widget: 'select',
+            default: 'none',
+            options: ['none', 'more', 'info'],
+          },
+        ],
+
+        fromBlock: function(match) {
+          function getAttribute(attribute, defaultValue) {
+            var val = match[1].match(attribute + '="(.*?)"');
+            return val ? val[1] : defaultValue;
+          }
+
+          return {
+            text: getAttribute('text', ''),
+            href: getAttribute('href', ''),
+            icon: getAttribute('icon', 'none'),
+          };
+        },
+
+        toBlock: function(obj) {
+          return (
+            '{% button text="' +
+            obj.text +
+            '" href="' +
+            obj.href +
+            '" icon="' +
+            obj.icon +
+            '" %}'
           );
         },
+
+        toPreview: function(obj) {
+          if (obj.icon && obj.icon != 'none') {
+            obj.text = '<span>' + obj.text + '</span>';
+            var icon =
+              '<svg width="16" height="16" class="sym icon-' +
+              obj.icon +
+              '"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/symbols.svg#' +
+              obj.icon +
+              '"></use></svg>';
+          } else icon = '';
+
+          if (obj.text) {
+            return (
+              '<div class="button-container"><a href="' +
+              obj.href +
+              '" class="btn">' +
+              icon +
+              obj.text +
+              '</a></div>'
+            );
+          }
+        },
       });
-      CMS.registerPreviewTemplate('posts', PostPreview);
     </script>
   </body>
 </html>

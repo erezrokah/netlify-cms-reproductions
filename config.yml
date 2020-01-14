@@ -7,26 +7,30 @@ publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - name: 'cards'
+    label: 'Frontpage'
+    label_singular: 'Card'
+    folder: '_content/_cards'
     create: true
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
+        hint: Een herkenbare titel met enkele kernwoorden.
+
+      - label: Order
+        name: order
+        widget: number
+        default: 1
+        valueType: 'int'
+        min: 1
+        max: 99
+        hint: De plaats van dit item op de frontpage.
+
+      - label: Image
+        name: image
+        widget: image
+
       - label: Body
         name: body
         widget: markdown

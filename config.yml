@@ -1,7 +1,7 @@
 backend:
   name: github
   branch: master
-  repo: erezrokah/netlify-cms-demo
+  repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: static/media

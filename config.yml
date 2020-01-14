@@ -3,30 +3,24 @@ backend:
   branch: master
   repo: erezrokah/netlify-cms-reproductions
 
+media_folder: static/img
+public_folder: /img
 publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
-    create: true
-    fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+  - name: contentpages
+    label: Content pages
+    files:
+      - label: Homepage
+        name: homepage
+        file: src/pages/contentpages/homepage.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: url
+            name: url
+            widget: hidden
+            default: /
+          - label: Body
+            name: body
+            widget: markdown

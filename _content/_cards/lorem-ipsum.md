@@ -1,7 +1,7 @@
 ---
 title: Lorem ipsum
 order: 1
-image: /media/netlify.jpg
+image: /media/netlify.png
 ---
 
 Lorem ipsum **dolor sit amet**, consectetuer adipiscing elit.

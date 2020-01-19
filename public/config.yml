@@ -1,5 +1,6 @@
 backend:
   name: git-gateway
+  branch: netlify_cms/issue_819
 
 # publish_mode: editorial_workflow
 media_folder: static/media

@@ -4,6 +4,10 @@
     <meta charset="utf-8" />
 
     <title>Netlify CMS Development Test</title>
+    <script
+      type="text/javascript"
+      src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+    ></script>
   </head>
   <body>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
@@ -14,8 +18,16 @@
           return h(
             'div',
             {},
-            h('div', { className: 'cover' }, h('h1', {}, entry.getIn(['data', 'title']))),
-            h('p', {}, h('small', {}, 'Written ' + entry.getIn(['data', 'date']))),
+            h(
+              'div',
+              { className: 'cover' },
+              h('h1', {}, entry.getIn(['data', 'title'])),
+            ),
+            h(
+              'p',
+              {},
+              h('small', {}, 'Written ' + entry.getIn(['data', 'date'])),
+            ),
             h('div', { className: 'text' }, this.props.widgetFor('body')),
           );
         },

@@ -1,9 +1,7 @@
 backend:
-  name: github
-  branch: master
-  repo: erezrokah/netlify-cms-reproductions
+  name: git-gateway
 
-publish_mode: editorial_workflow
+# publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
 collections:

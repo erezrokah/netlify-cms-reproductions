@@ -12,9 +12,9 @@ collections:
     label: Pages
     label_singular: 'Page'
     folder: content
-    path: '{{language}}/{{category}}/{{title}}'
-    media_folder: '../../../../{{media_folder}}/{{category}}/{{filename}}'
-    public_folder: '/{{public_folder}}/{{category}}/{{filename}}'
+    path: '{{language}}/{{categories[0]}}/{{title}}'
+    media_folder: '../../../{{media_folder}}/{{categories[0]}}/{{filename}}'
+    public_folder: '/{{public_folder}}/{{categories[0]}}/{{filename}}'
     create: true
     fields:
       - label: Title

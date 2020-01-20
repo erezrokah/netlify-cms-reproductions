@@ -1,32 +1,41 @@
 backend:
   name: github
-  branch: master
+  branch: netlify_cms/issue_3054
   repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+media_folder: static/images
+public_folder: static/images
+
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - name: pages
+    label: Pages
+    label_singular: 'Page'
+    folder: content
+    path: '{{language}}/{{category}}/{{title}}'
+    media_folder: '../../../../{{media_folder}}/{{category}}/{{filename}}'
+    public_folder: '/{{public_folder}}/{{category}}/{{filename}}'
     create: true
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
+      - label: Language
+        name: language
+        widget: select
+        options:
+          - { label: 'English', value: 'en' }
+          - { label: 'Chinese', value: 'zh' }
+        default: en
       - label: Publish Date
         name: date
         widget: datetime
+      - label: Description
+        name: description
+        widget: text
+      - label: Categories
+        name: categories
+        widget: list
       - label: Body
         name: body
         widget: markdown

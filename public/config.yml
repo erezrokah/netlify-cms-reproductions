@@ -1,9 +1,8 @@
 backend:
   name: github
-  branch: master
+  branch: netlify_cms/get_asset
   repo: erezrokah/netlify-cms-reproductions
 
-publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
 collections:
@@ -12,6 +11,7 @@ collections:
     label_singular: 'Post'
     folder: content/posts
     create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
       - label: Template
         name: template
@@ -24,9 +24,6 @@ collections:
         name: 'image'
         widget: 'image'
         required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
       - label: Body
         name: body
         widget: markdown

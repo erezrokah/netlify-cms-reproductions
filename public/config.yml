@@ -1,6 +1,7 @@
 backend:
   name: github
   branch: feature/cms
+  repo: erezrokah/netlify-cms-reproductions
   commit_messages:
     create: 'Create {{collection}} "{{slug}}"'
     update: 'Update {{collection}} "{{slug}}"'

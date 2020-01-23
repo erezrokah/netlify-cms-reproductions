@@ -6,21 +6,125 @@
     <title>Netlify CMS Development Test</title>
   </head>
   <body>
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
-      var PostPreview = createClass({
-        render: function() {
-          var entry = this.props.entry;
-          return h(
-            'div',
-            {},
-            h('div', { className: 'cover' }, h('h1', {}, entry.getIn(['data', 'title']))),
-            h('p', {}, h('small', {}, 'Written ' + entry.getIn(['data', 'date']))),
-            h('div', { className: 'text' }, this.props.widgetFor('body')),
-          );
+      const posts = {
+        label: 'Posts',
+        name: 'posts',
+        folder: 'src/posts',
+        create: true,
+        preview_path: 'blog/{{slug}}',
+        fields: [
+          {
+            label: 'SEO Title',
+            name: 'title',
+            widget: 'string',
+          },
+          {
+            label: 'SEO Description',
+            name: 'description',
+            widget: 'string',
+          },
+          {
+            label: 'Slug Override',
+            name: 'slug',
+            widget: 'string',
+            hint: "Will override default slug generated from 'SEO Title'.",
+            pattern: [
+              '^[a-z][-a-z0-9]*$',
+              'Only lowercase alpha-numeric and hyphen characters allowed.',
+            ],
+            required: false,
+          },
+          {
+            label: 'Date',
+            name: 'date',
+            widget: 'date',
+            format: 'YYYY-MM-DD',
+          },
+          {
+            label: 'Author',
+            name: 'author',
+            widget: 'relation',
+            collection: 'authors',
+            searchFields: ['title'],
+            valueField: 'title',
+            displayFields: ['title'],
+          },
+          {
+            label: 'Categories',
+            name: 'categories',
+            widget: 'select',
+            multiple: true,
+            options: ['category1', 'category2'],
+          },
+          {
+            label: 'Featured Image',
+            name: 'featuredImage',
+            widget: 'image',
+          },
+          {
+            label: 'Social Media Image',
+            name: 'socialMediaImage',
+            widget: 'image',
+          },
+          {
+            label: 'Body',
+            name: 'body',
+            widget: 'markdown',
+          },
+          {
+            label: 'Article CTA',
+            name: 'articleCTA',
+            hint: 'Override default CTA for blog posts',
+            widget: 'relation',
+            collection: 'articleCTA',
+            searchFields: ['title'],
+            valueField: 'title',
+            displayFields: ['title'],
+            required: false,
+          },
+        ],
+      };
+
+      const articles = {
+        create: true,
+        label: 'Articles',
+        name: 'articleCTA',
+        folder: 'src/articles',
+        fields: [
+          {
+            label: 'Title',
+            name: 'title',
+            widget: 'string',
+          },
+        ],
+      };
+
+      CMS.init({
+        config: {
+          load_config_file: false,
+          backend: {
+            name: 'github',
+            repo: 'erezrokah/netlify-cms-reproductions',
+            branch: 'netlify_cms/issue_3123',
+          },
+          publish_mode: 'editorial_workflow',
+          media_library: {
+            name: 'cloudinary',
+            config: {
+              cloud_name: 'erezro',
+              api_key: '591979259993767',
+            },
+          },
+          media_folder: '/static/uploads',
+          public_folder: '/uploads',
+          collections: [posts, articles],
         },
       });
-      CMS.registerPreviewTemplate('posts', PostPreview);
     </script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 backend:
   name: github
-  branch: netlify_cms/issue_3123
+  branch: issue_from_slack_public_path
   repo: erezrokah/netlify-cms-reproductions
 
 media_folder: static/uploads

@@ -1,11 +1,20 @@
 backend:
-  name: github
-  branch: master
-  repo: erezrokah/netlify-cms-reproductions
+  name: git-gateway
+  repo: mercos/site-blog
+  branch: master # Branch to update (optional; defaults to master)
 
 publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+
+media_folder: 'public/uploads' # Media files will be stored in the repo under public/uploads
+public_folder: '/uploads' # Folder path where uploaded files will be accessed, relative to the base of the built site
+
+site_url: https://mercos.com
+logo_url: https://mercos.com/images/site/logo-mercos-colored.png
+
+slug:
+  encoding: 'ascii'
+  clean_accents: true
+
 collections:
   - name: posts
     label: Posts

@@ -1,22 +1,17 @@
 backend:
   name: github
-  branch: master
+  branch: netlify_cms/issue_3123
   repo: erezrokah/netlify-cms-reproductions
 
-publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+media_folder: static/uploads
+public_folder: uploads
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - name: articles
+    label: Articles
+    label_singular: 'Article'
+    folder: content/articles
     create: true
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string

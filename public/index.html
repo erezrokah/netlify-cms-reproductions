@@ -6,21 +6,6 @@
     <title>Netlify CMS Development Test</title>
   </head>
   <body>
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-    <script>
-      var PostPreview = createClass({
-        render: function() {
-          var entry = this.props.entry;
-          return h(
-            'div',
-            {},
-            h('div', { className: 'cover' }, h('h1', {}, entry.getIn(['data', 'title']))),
-            h('p', {}, h('small', {}, 'Written ' + entry.getIn(['data', 'date']))),
-            h('div', { className: 'text' }, this.props.widgetFor('body')),
-          );
-        },
-      });
-      CMS.registerPreviewTemplate('posts', PostPreview);
-    </script>
+    <script src="https://unpkg.com/netlify-cms@2.9.7/dist/netlify-cms.js"></script>
   </body>
 </html>

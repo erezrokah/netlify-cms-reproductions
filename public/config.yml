@@ -1,32 +1,38 @@
 backend:
   name: github
-  branch: master
+  branch: netlify_cms/issue_3132
   repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+
+media_folder: /static/Images
+public_folder: /Images
+
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
-    create: true
+  - name: getting-started
+    folder: src/posts/getting-started
+    media_folder: /static/Images/docs/getting-started
+    public_folder: /Images/docs/getting-started
+
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
+      - { label: 'Title', name: 'title', widget: 'string' }
       - label: 'Cover Image'
         name: 'image'
         widget: 'image'
         required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+      - { label: 'Body', name: 'body', widget: 'markdown', hint: 'Main content goes here.' }
+
+  - name: extending
+    folder: src/posts/getting-started
+    media_folder: '{{media_folder}}/docs/extending'
+    public_folder: '{{public_folder}}/docs/extending'
+
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - label: 'Cover Image'
+        name: 'image'
+        widget: 'image'
+        required: false
+      - { label: 'Body', name: 'body', widget: 'markdown', hint: 'Main content goes here.' }

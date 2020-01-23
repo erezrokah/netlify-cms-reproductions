@@ -11,6 +11,19 @@
     </script>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
+      const authors = {
+        label: 'Authors',
+        name: 'authors',
+        folder: 'src/authors',
+        create: true,
+        fields: [
+          {
+            label: 'Title',
+            name: 'title',
+            widget: 'string',
+          },
+        ],
+      };
       const posts = {
         label: 'Posts',
         name: 'posts',
@@ -122,7 +135,7 @@
           },
           media_folder: '/static/uploads',
           public_folder: '/uploads',
-          collections: [posts, articles],
+          collections: [authors, posts, articles],
         },
       });
     </script>

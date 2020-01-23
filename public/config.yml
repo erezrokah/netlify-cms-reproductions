@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
-  repo: mercos/site-blog
-  branch: master # Branch to update (optional; defaults to master)
+  repo: erezrokah/netlify-cms-reproductions
+  branch: netlify_cms/issue_3129 # Branch to update (optional; defaults to master)
 
 publish_mode: editorial_workflow
 

@@ -1,32 +1,49 @@
 backend:
   name: github
-  branch: master
+  branch: netlify_cms/issue_3128
   repo: erezrokah/netlify-cms-reproductions
+  site_domain: quirky-bassi-7f760a.netlify.com
 
-publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+public_folder: "/src/images/"
+media_folder: "/src/images/"
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: erezro
+    api_key: '591979259993767'
+
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - label: "Projects" # Used in the UI
+    name: "projects" # Used in routes, e.g., /admin/collections/blog
+    label_singular: 'Project'
+    folder: "src/data/projects" # The path to the file where projects are defined
+    media_folder: 'images' # Should save images in same directory as the project, to make referencing easier
     create: true
-    fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+    extension: json
+    format: json
+    fields: # The fields for each document, usually in front matter
+      - {label: "Project Name", name: "project", widget: "string", hint: "A project name used for files and folders", pattern: ['^[\w\-]+$', "Accepted characters are alphanumeric, _, and -."]}
+      - {label: "Image", name: "image", widget: "image", allow_multiple: false}
+      - label: "Gallery"
+        name: "galleryImages"
+        widget: "list"
+        field:
+        - {label: "Image", name: "image", widget: "image"
+      - {label: "Start Date", name: "start", widget: "datetime", timeformat: false, dateFormat: "MMMM YYYY", format: "MMMM YYYY"}
+      - label: "End Date"
+        name: "end"
+        widget: "object"
+        fields:
+        - {label: "Present", name: "present", widget: "boolean", default: false, hint: "Toggle on if project's in development.", required: false}
+        - {label: "Completed", name: "date", widget: "datetime", timeformat: false, dateFormat: "MMMM YYYY", format: "MMMM YYYY"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Subtitle", name: "subtitle", widget: "string"}
+      - label: "Icons"
+        name: "icons"
+        widget: "object"
+        fields:
+          - {label: "Font Awesome", name: "fa", widget: "list", field: {label: Icon, name: icon, widget: string}, required: false}
+          - {label: "Devicons", name: "di", widget: "list", field: {label: Icon, name: icon, widget: string}, required: false}
+          - {label: "Ionicons", name: "io", widget: "list", field: {label: Icon, name: icon, widget: string}, required: false}
+      - {label: "Description", name: "description", widget: "markdown"}
+      - {label: "Link", name: "link", widget: "string", required: false}

@@ -30,12 +30,7 @@ collections:
           pattern:
             ['^[\w\-]+$', 'Accepted characters are alphanumeric, _, and -.'],
         }
-      - {
-          label: 'Image',
-          name: 'image',
-          widget: 'image',
-          allow_multiple: false,
-        }
+      - { label: 'Image', name: 'image', widget: 'image', allow_multiple: true }
       - label: 'Gallery'
         name: 'galleryImages'
         widget: 'list'

@@ -1,32 +1,125 @@
 backend:
   name: github
-  branch: master
+  branch: netlify_cms/slack_tree_path
   repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+media_folder: 'assets/images'
+
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
-    create: true
+  - label: 'Top Level Pages' # Used in the UI
+    name: 'page'
+    folder: 'docs'
+    create: true # Allow users to create new documents in this collection
+    slug: '{{title}}' # Filename template, e.g., YYYY-MM-DD-title.md
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+      - {
+          label: 'Layout',
+          name: 'layout',
+          widget: 'hidden',
+          default: 'default',
+        }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Parent', name: 'parent', widget: 'string', required: false }
+      - { label: 'Nav Order', name: 'nav_order', widget: 'number' }
+      - {
+          label: 'Has Children',
+          name: 'has_children',
+          widget: 'boolean',
+          default: false,
+          required: false,
+        }
+      - {
+          label: 'Permalink',
+          name: 'permalink',
+          widget: 'string',
+          required: false,
+        }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - label: 'UI Components'
+    name: 'ui-components'
+    folder: '/docs/ui-components/'
+    create: true # Allow users to create new documents in this collection
+    slug: '/ui-components/docs/{{title}}' # Filename template, e.g., YYYY-MM-DD-title.md
+    fields:
+      - {
+          label: 'Layout',
+          name: 'layout',
+          widget: 'hidden',
+          default: 'default',
+        }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Parent', name: 'parent', widget: 'string', required: false }
+      - { label: 'Nav Order', name: 'nav_order', widget: 'number' }
+      - {
+          label: 'Has Children',
+          name: 'has_children',
+          widget: 'boolean',
+          default: false,
+          required: false,
+        }
+      - {
+          label: 'Permalink',
+          name: 'permalink',
+          widget: 'string',
+          required: false,
+        }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - label: 'Utilities'
+    name: 'utilities'
+    create: true # Allow users to create new documents in this collection
+    slug: '/utilities/docs/{{title}}' # Filename template, e.g., YYYY-MM-DD-title.md
+    folder: 'docs/utilities/'
+    fields:
+      - {
+          label: 'Layout',
+          name: 'layout',
+          widget: 'hidden',
+          default: 'default',
+        }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Parent', name: 'parent', widget: 'string', required: false }
+      - { label: 'Nav Order', name: 'nav_order', widget: 'number' }
+      - {
+          label: 'Has Children',
+          name: 'has_children',
+          widget: 'boolean',
+          default: false,
+          required: false,
+        }
+      - {
+          label: 'Permalink',
+          name: 'permalink',
+          widget: 'string',
+          required: false,
+        }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - label: 'Tatianas Pages'
+    name: tatiana-test"
+    folder: 'docs/tatiana-test/'
+    create: true # Allow users to create new documents in this collection
+    slug: '/tatiana-test/docs/{{title}}' # Filename template, e.g., YYYY-MM-DD-title.md
+    fields:
+      - {
+          label: 'Layout',
+          name: 'layout',
+          widget: 'hidden',
+          default: 'default',
+        }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Parent', name: 'parent', widget: 'string', required: false }
+      - { label: 'Nav Order', name: 'nav_order', widget: 'number' }
+      - {
+          label: 'Has Children',
+          name: 'has_children',
+          widget: 'boolean',
+          default: false,
+          required: false,
+        }
+      - {
+          label: 'Permalink',
+          name: 'permalink',
+          widget: 'string',
+          required: false,
+        }
+      - { label: 'Body', name: 'body', widget: 'markdown' }

@@ -12,6 +12,8 @@ collections:
     label_singular: 'Post'
     folder: content/posts
     create: true
+    media_folder: ''
+    public_folder: ''
     fields:
       - label: Template
         name: template
@@ -24,9 +26,21 @@ collections:
         name: 'image'
         widget: 'image'
         required: false
+        media_library:
+          config:
+            media_folder: '/{{media_folder}}/posts/images/widget/image'
+            public_folder: '{{public_folder}}/posts/images/widget/image'
       - label: Publish Date
         name: date
         widget: datetime
+      - label: Entry Image
+        name: 'entryimage'
+        widget: 'image'
+        required: false
       - label: Body
         name: body
         widget: markdown
+        media_library:
+          config:
+            media_folder: '/{{media_folder}}/posts/images/widget/body'
+            public_folder: '{{public_folder}}/posts/images/widget/body'

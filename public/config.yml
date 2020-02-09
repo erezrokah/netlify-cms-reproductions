@@ -36,7 +36,7 @@ collections:
             name: body
             widget: markdown
       - file: src/posts/post2.md
-        name: post1
+        name: post2
         label: 'Post 2'
         media_folder: '{{media_folder}}/posts/post2'
         public_folder: '{{public_folder}}/posts/post2'

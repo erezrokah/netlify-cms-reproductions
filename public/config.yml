@@ -26,10 +26,8 @@ collections:
         name: 'image'
         widget: 'image'
         required: false
-        media_library:
-          config:
-            media_folder: '/{{media_folder}}/posts/images/widget/image'
-            public_folder: '{{public_folder}}/posts/images/widget/image'
+        media_folder: '/{{media_folder}}/posts/images/widget/image'
+        public_folder: '{{public_folder}}/posts/images/widget/image'
       - label: Publish Date
         name: date
         widget: datetime
@@ -40,7 +38,5 @@ collections:
       - label: Body
         name: body
         widget: markdown
-        media_library:
-          config:
-            media_folder: '/{{media_folder}}/posts/images/widget/body'
-            public_folder: '{{public_folder}}/posts/images/widget/body'
+        media_folder: '/{{media_folder}}/posts/images/widget/body'
+        public_folder: '{{public_folder}}/posts/images/widget/body'

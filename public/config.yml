@@ -1,32 +1,56 @@
 backend:
   name: github
-  branch: master
+  branch: netlify_cms/issue_3199
   repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
-media_folder: static/media
+media_folder: /static/media
 public_folder: /media
+
 collections:
   - name: posts
     label: Posts
     label_singular: 'Post'
-    folder: content/posts
-    create: true
-    fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+    files:
+      - file: src/posts/post1.md
+        media_folder: '{{media_folder}}/posts/post1'
+        public_folder: '{{public_folder}}/posts/post1'
+        fields:
+          - label: Template
+            name: template
+            widget: hidden
+            default: post
+          - label: Title
+            name: title
+            widget: string
+          - label: 'Cover Image'
+            name: 'image'
+            widget: 'image'
+            required: false
+          - label: Publish Date
+            name: date
+            widget: datetime
+          - label: Body
+            name: body
+            widget: markdown
+      - file: src/posts/post2.md
+        media_folder: '{{media_folder}}/posts/post2'
+        public_folder: '{{public_folder}}/posts/post2'
+        fields:
+          - label: Template
+            name: template
+            widget: hidden
+            default: post
+          - label: Title
+            name: title
+            widget: string
+          - label: 'Cover Image'
+            name: 'image'
+            widget: 'image'
+            required: false
+          - label: Publish Date
+            name: date
+            widget: datetime
+          - label: Body
+            name: body
+            widget: markdown

@@ -13,6 +13,8 @@ collections:
     label_singular: 'Post'
     files:
       - file: src/posts/post1.md
+        name: post1
+        label: 'Post 1'
         media_folder: '{{media_folder}}/posts/post1'
         public_folder: '{{public_folder}}/posts/post1'
         fields:
@@ -34,6 +36,8 @@ collections:
             name: body
             widget: markdown
       - file: src/posts/post2.md
+        name: post1
+        label: 'Post 2'
         media_folder: '{{media_folder}}/posts/post2'
         public_folder: '{{public_folder}}/posts/post2'
         fields:

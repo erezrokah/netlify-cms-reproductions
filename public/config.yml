@@ -6,6 +6,7 @@ backend:
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+local_backend: true
 collections:
   - name: 'posts'
     identifier_field: 'en.title'

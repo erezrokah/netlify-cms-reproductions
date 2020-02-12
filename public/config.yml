@@ -1,32 +1,32 @@
 backend:
   name: github
-  branch: master
+  branch: netlify_cms/pr_3219
   repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
 collections:
-  - name: posts
-    label: Posts
+  - name: 'posts'
+    identifier_field: 'en.title'
+    label: 'Posts'
     label_singular: 'Post'
-    folder: content/posts
+    folder: 'src/pages/posts'
     create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
+      - label: English
+        name: en
+        widget: object
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Body, name: body, widget: markdown }
+      - label: Spanish
+        name: es
+        widget: object
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Body, name: body, widget: markdown }
+
       - label: Title
         name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown

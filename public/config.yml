@@ -8,16 +8,27 @@ local_backend: true
 media_folder: /static/img
 collections:
   - name: general
+    label: General
     media_folder: '{{media_folder}}/general/'
     files:
       - name: partners
+        file: src/general/partners.md
+        label: Partners
         fields:
+          - name: Title
+            label: title
+            widget: string
           - name: featured_image
             widget: image
             media_folder: '{{media_folder}}/partners/'
       - name: customers
+        label: Customers
+        file: src/customers/partners.md
         media_folder: '{{media_folder}}/customers/'
         fields:
+          - name: Title
+            label: title
+            widget: string
           - name: main_image
             widget: image
           - name: logo

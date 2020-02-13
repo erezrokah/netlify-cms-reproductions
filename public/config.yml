@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: master
+  branch: staging
 
 publish_mode: editorial_workflow
 media_folder: static/media

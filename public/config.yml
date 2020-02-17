@@ -1,31 +1,26 @@
 backend:
   name: git-gateway
-  branch: master
+  branch: netlify_cms/issue_1745
 
-publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+local_backend: true
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - name: things
+    label: Things
+    label_singular: thing
+    folder: things
     create: true
+    slug: '{{id}}'
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
+      - label: Id
+        name: id
+        widget: string
+      - label: Publication Date
+        name: publicationDate
+        default: ''
         required: false
-      - label: Publish Date
-        name: date
         widget: datetime
-      - label: Body
-        name: body
-        widget: markdown

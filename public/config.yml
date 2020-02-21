@@ -1,11 +1,12 @@
 backend:
   name: github
-  branch: netlify_cms/issue_1669
+  branch: netlify_cms/pagination
   repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+local_backend: true
 collections:
   - name: posts
     label: Posts

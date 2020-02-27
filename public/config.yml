@@ -2,6 +2,7 @@ backend:
   name: github
   branch: netlify_cms/fix_open_authoring_migration
   repo: erezrokah/netlify-cms-reproductions
+  open_authoring: true
 
 publish_mode: editorial_workflow
 media_folder: static/media

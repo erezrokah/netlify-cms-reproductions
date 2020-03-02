@@ -1,6 +1,7 @@
 backend:
-  name: git-gateway
-  branch: master
+  name: github
+  branch: netlify_cms/issue_3332
+  open_authoring: true
 
 publish_mode: editorial_workflow
 media_folder: static/media

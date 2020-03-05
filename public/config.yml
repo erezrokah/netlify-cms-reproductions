@@ -1,10 +1,10 @@
 backend:
-  name: git-gateway
-  branch: master
+  name: github
+  branch: netlify_cms/issue_2906
+  repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+media_folder: static/images
 collections:
   - name: posts
     label: Posts

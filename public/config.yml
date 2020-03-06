@@ -1,16 +1,20 @@
 backend:
-  name: git-gateway
-  branch: master
+  name: github
+  branch: netlify_cms/issue_716
+  repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+local_backend: true
+locales: ['en', 'de', 'fr']
 collections:
   - name: posts
     label: Posts
     label_singular: 'Post'
     folder: content/posts
     create: true
+    multi_content: same_folder
     fields:
       - label: Template
         name: template

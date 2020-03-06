@@ -1,6 +1,6 @@
 backend:
-  name: github
-  branch: netlify_cms/issue_2906
+  name: git-gateway
+  branch: netlify_cms/issue_2906_large_media
   repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow

@@ -1,31 +1,30 @@
 backend:
-  name: git-gateway
-  branch: master
+  name: github
+  branch: netlify_cms/issue_3436
+  repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+local_backend: true
+
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - name: leadership
+    label: Leadership
+    folder: content/leadership
     create: true
+    media_folder: ../../static/images/leadership
+    public_folder: /images/leadership
+
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string
-      - label: 'Cover Image'
-        name: 'image'
+      - label: 'Profile Image'
+        name: 'imgSrc'
         widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+        pattern: [
+            '^blah_[a-z]+-[a-z]+\.(jpg|jpeg|png|gif|bmp)$',
+            'Must match the format: blah_{firstname}-{lastname}.{format}
+            without brackets and have one of the following extensions (jpg|jpeg|png|gif|bmp)',
+          ]

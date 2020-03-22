@@ -6,6 +6,20 @@
     <title>Netlify CMS Development Test</title>
   </head>
   <body>
-    <script src="dist/netlify-cms.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="netlify-cms.js"></script>
+    <script>
+      const data = moment.localeData('ja');
+      let locale = {};
+      Object.keys(data).forEach(key => {
+        const value = data[key];
+        if (key.startsWith('_')) {
+          key = key.substring(1);
+        }
+        locale[key] = value;
+      });
+      CMS.moment.locale('ja', locale);
+      console.log(CMS.moment.locale());
+    </script>
   </body>
 </html>

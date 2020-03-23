@@ -1,7 +1,7 @@
 backend:
   name: github
   branch: netlify_cms/issue_1298
-  repo: erezrokah/netlify-cms/-reproductions
+  repo: erezrokah/netlify-cms-reproductions
   open_authoring: true
 
 publish_mode: editorial_workflow

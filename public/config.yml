@@ -1,7 +1,15 @@
 backend:
-  name: git-gateway
-  branch: master
+  name: github
+  branch: netlify_cms/issue_1999
+  repo: erezrokah/netlify-cms-reproductions
 
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: erezro
+    api_key: 591979259993767
+
+local_backend: true
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media

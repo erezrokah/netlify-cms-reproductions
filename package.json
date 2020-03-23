@@ -20,7 +20,7 @@
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "husky": "^4.0.7",
-    "prettier": "^1.17.1"
+    "prettier": "^2.0.0"
   },
   "husky": {
     "hooks": {

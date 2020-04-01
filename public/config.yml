@@ -1,31 +1,20 @@
 backend:
   name: git-gateway
-  branch: master
-
-publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+  branch: netlify_cms/issue_slack_preview_t_not_defined
+media_folder: static/img
+public_folder: /img
+site_url: https://my.site.url
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - name: 'news'
+    label: 'News'
+    format: 'json'
+    folder: 'assets/content/news'
     create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    preview_path: news/{{slug}}
+    editor:
+      preview: true
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }

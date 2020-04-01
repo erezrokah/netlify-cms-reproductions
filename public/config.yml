@@ -15,3 +15,10 @@ collections:
     path: '../{{language}}/{{section}}/{{slug}}'
     media_folder: '../../../static/img/'
     public_folder: 'img'
+    fields:
+      - name: 'title'
+        widget: 'string'
+        label: 'Title'
+      - name: 'image'
+        widget: 'image'
+        label: 'Image'

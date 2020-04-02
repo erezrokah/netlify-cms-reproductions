@@ -8,7 +8,7 @@
   "overrides": [
     {
       "files": "*.json",
-      "options": { "printWidth": 200 }
+      "options": { "printWidth": 160 }
     }
   ]
 }

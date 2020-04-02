@@ -5,27 +5,20 @@ backend:
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+local_backend: true
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
-    create: true
-    fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+  - name: files
+    label: Files
+    label_singular: 'File'
+    files:
+      - file: 'src/pages/board/index.md'
+        label: 'Board Page'
+        name: 'board'
+        fields:
+          - { label: Title, name: title, widget: string }
+          - {
+              label: File,
+              name: file,
+              media_folder: '/static/board',
+              widget: file,
+            }

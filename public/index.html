@@ -10,6 +10,28 @@
       type="text/javascript"
       src="https://identity.netlify.com/v1/netlify-identity-widget.js"
     ></script>
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script src="dist/netlify-cms.js"></script>
+
+    <script>
+      var PostPreview = createClass({
+        render: function() {
+          var entry = this.props.entry;
+          return h(
+            'div',
+            {},
+            h(
+              'div',
+              { className: 'cover' },
+              h('h1', {}, entry.getIn(['data', 'title'])),
+              this.props.widgetFor('image'),
+            ),
+            h('p', {}, h('small', {}, 'Written ' + entry.getIn(['data', 'date']))),
+            h('div', { className: 'text' }, this.props.widgetFor('body')),
+          );
+        },
+      });
+
+      CMS.registerPreviewTemplate('posts', PostPreview);
+    </script>
   </body>
 </html>

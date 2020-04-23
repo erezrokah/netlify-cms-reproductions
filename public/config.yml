@@ -1,31 +1,95 @@
 backend:
   name: git-gateway
-  branch: master
-
+  use_graphql: true
+  branch: master # Branch to update (optional; defaults to master)
 publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+# This line should *not* be indented
+media_folder: 'static' # Media files will be stored in the repo under images/uploads
+public_folder: '/'
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
-    create: true
-    fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
+  - name: 'blog' # Used in routes, e.g., /admin/collections/blog
+    label: 'Blog' # Used in the UI
+    folder: 'content/blog' # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: '{{slug}}' # Filename template, e.g., YYYY-MM-DD-title.md
+    preview_path: '{{slug}}'
+    identifier_field: blogTitle
+    fields: # The fields for each document, usually in front matter
+      - {
+          label: 'Layout',
+          name: 'blogLayout',
+          widget: 'hidden',
+          default: 'blog',
+        }
+      - { label: 'Publish Date', name: 'blogDate', widget: 'datetime' }
+      - {
+          label: 'Author',
+          name: 'blogAuthor',
+          widget: 'string',
+          required: false,
+        }
+      - { label: 'Title', name: 'blogTitle', widget: 'string' }
+      - {
+          label: 'Subtitle',
+          name: 'blogSubtitle',
+          widget: 'string',
+          required: false,
+        }
+      - name: blogImage
+        label: Featured image
+        widget: object
         required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+        fields:
+          - { name: src, label: Image, widget: image, required: false }
+          - { name: alt, label: Alt text, widget: string, required: false }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+      - name: postCategory
+        label: Category
+        widget: select
+        multiple: false
+        options:
+          - blog
+          - in-the-news
+          - partner-blog
+          - press-release
+          - webinar
+
+  - name: 'bio' # Used in routes, e.g., /admin/collections/blog
+    label: 'Bios' # Used in the UI
+    folder: 'content/bio' # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: '{{slug}}' # Filename template, e.g., YYYY-MM-DD-title.md
+    preview_path: '{{slug}}'
+    identifier_field: bioName
+    fields: # The fields for each document, usually in front matter
+      - { label: 'Layout', name: 'bioLayout', widget: 'hidden', default: 'bio' }
+      - { label: 'Name', name: 'bioName', widget: 'string' }
+      - { label: 'Job Title', name: 'jobTitle', widget: 'string' }
+      - name: bioImage
+        label: Bio Image
+        widget: object
+        required: true
+        fields:
+          - { name: src, label: Image, widget: image, required: true }
+          - { name: alt, label: Alt text, widget: string, required: true }
+      - {
+          label: 'Bio Statement (for Leadership)',
+          name: 'bioText',
+          widget: 'markdown',
+          required: false,
+        }
+      - { label: 'Why', name: 'whyAnswer', widget: 'markdown' }
+      - { label: 'Column One', name: 'columnOne', widget: 'markdown' }
+      - { label: 'Column Two', name: 'columnTwo', widget: 'markdown' }
+      - { label: 'Column Three', name: 'columnThree', widget: 'markdown' }
+      - name: jobCategory
+        label: Job Category
+        widget: select
+        multiple: false
+        options:
+          - support-staff
+          - chief
+          - director
+          - manager
+          - board-member
+      - { label: 'Publish Date', name: 'bioDate', widget: 'datetime' }

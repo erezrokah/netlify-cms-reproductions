@@ -1,7 +1,7 @@
 backend:
   name: github
   branch: netlify_cms/issue_3654
-  repo: erezrokah/netlify-cms-reproduction
+  repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: /static/uploads/

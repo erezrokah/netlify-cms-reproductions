@@ -1,21 +1,19 @@
 backend:
-  name: git-gateway
-  branch: master
+  name: github
+  branch: netlify_cms/issue_3654
+  repo: erezrokah/netlify-cms-reproduction
 
 publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+media_folder: /static/uploads/
+public_folder: /uploads
 collections:
   - name: posts
     label: Posts
     label_singular: 'Post'
-    folder: content/posts
+    folder: src/content/posts
     create: true
+    public_folder: '../../../static/uploads/'
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string
@@ -23,9 +21,6 @@ collections:
         name: 'image'
         widget: 'image'
         required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
       - label: Body
         name: body
         widget: markdown

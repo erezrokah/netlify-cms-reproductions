@@ -19,8 +19,10 @@ collections:
         name: relation
         widget: relation
         collection: files
-        valueField: categories.name
-        searchFields: ['categories.name']
+        valueField: categories.*.id
+        searchFields: [categories.*.name]
+        displayFields: [categories.*.name, categories.*.id]
+        file: categories
   - name: files
     label: Files
     label_singular: 'File'
@@ -37,6 +39,9 @@ collections:
               - label: Name
                 name: name
                 widget: string
+              - label: Id
+                name: id
+                widget: string
 
       - label: Tags
         name: tags
@@ -49,4 +54,7 @@ collections:
             fields:
               - label: Name
                 name: name
+                widget: string
+              - label: Id
+                name: id
                 widget: string

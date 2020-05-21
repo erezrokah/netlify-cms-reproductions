@@ -2,30 +2,38 @@ backend:
   name: git-gateway
   branch: master
 
-publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+local_backend: true
 collections:
   - name: posts
     label: Posts
     label_singular: 'Post'
     folder: content/posts
     create: true
+    summary: '{{title}} - {{draft}} - {{author}} - {{date}}'
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
+      - label: Draft
+        name: draft
+        widget: boolean
         required: false
+        default: true
       - label: Publish Date
         name: date
         widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+      - label: Author
+        name: author
+        widget: string
+    view_filters:
+      - label: Peter's and Arnold's Posts
+        field: author
+        pattern: Peter|Arnold
+      - label: Posts published in 2020
+        field: date
+        pattern: '2020'
+      - label: Drafts
+        field: draft
+        pattern: true

@@ -1,6 +1,21 @@
 backend:
   name: git-gateway
+  identity_url: https://nostalgic-keller-498b81.netlify.app/.netlify/identity
+  gateway_url: https://nostalgic-keller-498b81.netlify.app/.netlify/git
+
+  # name: bitbucket
+  # repo: erezro/netlify-cms-reproductions
+  # auth_type: implicit
+  # app_id: ATfdeqkMFdgQA3S8Tr
+
+  # name: gitlab
+  # repo: erezrokah/netlify-cms-reproductions-1
+  # auth_type: implicit
+  # app_id: 628f8d839384995436205e92ee008df827c42735d7e392d26375a9f4f7eec22a
+
+  # name: github
   branch: netlify_cms/issue_941
+  # repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: static/media

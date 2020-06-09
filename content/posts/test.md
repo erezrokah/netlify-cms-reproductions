@@ -1,6 +1,6 @@
 ---
 template: post
-title: test
+title: test2
 date: 2020-06-09T13:43:25.864Z
 ---
-test
+test2

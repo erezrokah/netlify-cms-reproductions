@@ -22,7 +22,7 @@ collections:
         required: false
         media_folder: /static/media
       - label: 'Thumbnail'
-        name: 'image'
+        name: 'thumbnail'
         widget: 'image'
         required: false
         media_folder: /static/media

@@ -1,31 +1,69 @@
 backend:
-  name: git-gateway
-  branch: master
+  name: github
+  branch: netlify_cms/issue_565
+  repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+local_backend: true
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - label: 'structure'
+    name: structure
+    folder: 'structure'
     create: true
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - label: 'structure'
+        name: structure
+        widget: 'list'
+        fields:
+          - {
+              label: 'type',
+              name: 'type',
+              widget: 'select',
+              default: '',
+              options:
+                ['copy', 'divider', 'image', 'infographic', 'productCircle'],
+            }
+          - label: content
+            name: content
+            widget: object
+            fields:
+              - {
+                  label: 'text',
+                  name: 'text',
+                  widget: 'markdown',
+                  conditions:
+                    [
+                      {
+                        fieldPath: 'structure.*.type',
+                        oneOf:
+                          ['divider', 'productCircle', infographic, image, ''],
+                      },
+                    ],
+                }
+              - {
+                  label: 'src',
+                  name: 'src',
+                  widget: 'image',
+                  conditions:
+                    [
+                      {
+                        fieldPath: 'structure.*.type',
+                        oneOf: ['divider', 'productCircle', copy, ''],
+                      },
+                    ],
+                }
+              - {
+                  label: 'overlay',
+                  name: 'overlay',
+                  widget: 'image',
+                  conditions:
+                    [
+                      {
+                        fieldPath: 'structure.*.type',
+                        oneOf: ['divider', 'productCircle', copy, image, ''],
+                      },
+                    ],
+                }

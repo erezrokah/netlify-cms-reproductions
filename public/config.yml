@@ -1,31 +1,51 @@
 backend:
-  name: git-gateway
-  branch: master
+  name: github
+  branch: netlify_cms/issue_3810
+  repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+local_backend: true
+
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - label: lookups
+    name: lookups
+    files:
+      - label: cities
+        name: cities
+        file: data/cities.json
+        fields:
+          - label: cities
+            label_singular: city
+            name: cities
+            widget: list
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: id
+                name: id
+                widget: hidden
+  - label: Folder Collection
+    name: folder_collection
+    folder: content/folder_collection
     create: true
+    identifier_field: id
+    slug: '{{city}}'
+    summary: '{{city}}'
+    editor:
+      preview: false
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+      - label: id
+        name: id
+        widget: ncw-id
+
+      - label: City
+        name: city
+        widget: relation
+        collection: lookups
+        file: cities
+        searchFields: ['cities.*.name']
+        displayFields: ['cities.*.name']
+        valueField: cities.*.name

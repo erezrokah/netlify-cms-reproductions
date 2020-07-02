@@ -1,31 +1,93 @@
 backend:
   name: git-gateway
-  branch: master
+  identity_url: https://website.ch/.netlify/identity
+  gateway_url: https://website.ch/.netlify/git
+  site_domain: https://website.ch/
+  branch: develop
 
-publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+local_backend: true
+
+media_folder: 'static/images/uploads'
+public_folder: '/images/uploads'
+display_url: https://website.ch
+logo_url: https://brand.website.ch/images/logo_classic.svg
+slug:
+  encoding: 'ascii'
+  clean_accents: true
+
 collections:
-  - name: posts
-    label: Posts
+  - name: 'posts' # Used in routes, e.g., /admin/collections/blog
+    label: 'Posts' # Used in the UI
     label_singular: 'Post'
-    folder: content/posts
-    create: true
-    fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
+    folder: 'content/posts' # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}' # Filename template, e.g., YYYY-MM-DD-title.md
+    view_filters:
+      - label: Drafts
+        field: draft
+        pattern: true
+    fields: # The fields for each document, usually in front matter
+      - label: 'Title'
+        name: 'title'
+        widget: 'string'
+      - label: 'Publish Date'
+        name: 'date'
+        widget: 'datetime'
+      - label: 'Author'
+        name: 'author'
+        widget: 'relation'
+        collection: 'authors'
+        searchFields: ['name']
+        valueField: 'author'
+        displayFields: ['name']
+      - label: 'Tags'
+        name: 'tags'
+        widget: 'list'
+        required: false
+      - label: 'Categories'
+        name: 'categories'
+        widget: 'select'
+        multiple: true
+        options:
+          - { label: 'Geschäftsbereiche', value: 'business-divisons' }
+          - { label: 'Prozesse', value: 'processes' }
+      - label: 'Draft'
+        name: 'draft'
+        widget: 'boolean'
+        required: false
+        default: true
+      - label: 'Featured Image'
+        name: 'featured_image'
         widget: 'image'
         required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+      - label: 'Body'
+        name: 'body'
+        widget: 'markdown'
+  - name: 'tools' # Used in routes, e.g., /admin/collections/blog
+    label: 'Tools' # Used in the UI
+    label_singular: 'Tool'
+    folder: 'content/tools' # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: '{{slug}}' # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Subtext', name: 'subtext', widget: 'string' }
+      - { label: 'Link', name: 'external_link', widget: 'string' }
+      - { label: 'Featured Image', name: 'featured_image', widget: 'image' }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'authors' # Used in routes, e.g., /admin/collections/blog
+    label: 'Authors' # Used in the UI
+    label_singular: 'Author'
+    format: yml
+    folder: 'data/authors' # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: '{{author}}' # Filename template, e.g., YYYY-MM-DD-title.md
+    identifier_field: name
+    fields: # The fields for each document, usually in front matter
+      - label: 'Name'
+        name: 'name'
+        widget: 'string'
+      - label: 'Kürzel'
+        name: 'author'
+        widget: 'string'
+        pattern: ['^[a-z]+$', 'Bitte das Kürzel eingeben']

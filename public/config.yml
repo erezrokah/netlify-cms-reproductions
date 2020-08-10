@@ -7,17 +7,22 @@ publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
 local_backend: true
-locales: ['en', 'de', 'fr']
+i18n: { structure: multiple_folder, locales: ['en', 'de', 'fr'] }
 collections:
   - name: locale_folders
     label: Locale Folders
     folder: content/locale_folders
     create: true
-    i18n_structure: locale_folders
+    i18n: true
     fields:
       - label: Title
         name: title
         widget: string
+        i18n: true
+      - label: Date
+        name: date
+        widget: datetime
+        i18n: 'duplicate'
       - label: Body
         name: body
         widget: markdown
@@ -25,11 +30,16 @@ collections:
     label: Locale File Extensions
     folder: content/locale_file_extensions
     create: true
-    i18n_structure: locale_file_extensions
+    i18n: { structure: multiple_files }
     fields:
       - label: Title
         name: title
         widget: string
+        i18n: true
+      - label: Date
+        name: date
+        widget: datetime
+        i18n: 'duplicate'
       - label: Body
         name: body
         widget: markdown
@@ -37,11 +47,16 @@ collections:
     label: Single File
     folder: content/single_file
     create: true
-    i18n_structure: single_file
+    i18n: { structure: single_file }
     fields:
       - label: Title
         name: title
         widget: string
+        i18n: true
+      - label: Date
+        name: date
+        widget: datetime
+        i18n: 'duplicate'
       - label: Body
         name: body
         widget: markdown

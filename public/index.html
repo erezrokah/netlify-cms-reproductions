@@ -11,5 +11,38 @@
       src="https://identity.netlify.com/v1/netlify-identity-widget.js"
     ></script>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+      const PostPreview = createClass({
+        async componentDidMount() {
+          const url = 'https://media-library.cloudinary.com/global/all.js';
+          const frame = document.querySelector('[class*="PreviewPaneFrame"]');
+          const body = frame.getElementsByTagName('body')[0];
+          const script = document.createElement('script');
+          await new Promise((resolve, reject) => {
+            let done = false;
+            script.src = url;
+            script.onload = script.onreadystatechange = function () {
+              if (
+                !done &&
+                (!this.readyState ||
+                  this.readyState === 'loaded' ||
+                  this.readyState === 'complete')
+              ) {
+                done = true;
+                resolve();
+              } else {
+                reject();
+              }
+            };
+            script.onerror = (error) => reject(error);
+            body.appendChild(script);
+          });
+        },
+        render: function () {
+          return 'This Preview Injects a script';
+        },
+      });
+      CMS.registerPreviewTemplate('posts', PostPreview);
+    </script>
   </body>
 </html>

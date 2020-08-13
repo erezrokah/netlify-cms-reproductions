@@ -7,7 +7,7 @@ publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
 local_backend: true
-i18n: { structure: multiple_folder, locales: ['en', 'de', 'fr'] }
+i18n: { structure: multiple_folders, locales: [en, de, fr] }
 collections:
   - name: locale_folders
     label: Locale Folders

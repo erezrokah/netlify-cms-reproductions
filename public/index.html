@@ -6,40 +6,28 @@
     <title>Netlify CMS Development Test</title>
   </head>
   <body>
-    <script
-      type="text/javascript"
-      src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-    ></script>
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script src="https://deploy-preview-4150--cms-demo.netlify.app/dist/netlify-cms.js"></script>
     <script>
       const PostPreview = createClass({
-        async componentDidMount() {
-          const url = 'https://media-library.cloudinary.com/global/all.js';
-          const frame = document.querySelector('[class*="PreviewPaneFrame"]');
-          const body = frame.getElementsByTagName('body')[0];
+        componentDidMount() {
+          const { document } = this.props;
           const script = document.createElement('script');
-          await new Promise((resolve, reject) => {
-            let done = false;
-            script.src = url;
-            script.onload = script.onreadystatechange = function () {
-              if (
-                !done &&
-                (!this.readyState ||
-                  this.readyState === 'loaded' ||
-                  this.readyState === 'complete')
-              ) {
-                done = true;
-                resolve();
-              } else {
-                reject();
-              }
-            };
-            script.onerror = (error) => reject(error);
-            body.appendChild(script);
-          });
+          script.src = 'https://unpkg.com/alpinejs@2.5.0/dist/alpine.js';
+          document.head.appendChild(script);
         },
         render: function () {
-          return 'This Preview Injects a script';
+          const html = `
+            <div x-data="{ open: false }">
+              <button x-on:click="open = true">Open Dropdown</button>
+
+              <ul x-show="open" x-on:click.away="open = false">
+                Dropdown Body
+              </ul>
+            </div>
+          `;
+          return h('div', {
+            dangerouslySetInnerHTML: { __html: html },
+          });
         },
       });
       CMS.registerPreviewTemplate('posts', PostPreview);

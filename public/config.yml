@@ -1,31 +1,23 @@
 backend:
-  name: git-gateway
-  branch: master
+  name: github
+  repo: erezrokah/netlify-cms-reproductions
+  branch: netlify_cms/issue_3227
 
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - name: pages
+    label: Pages
+    label_singular: 'Page'
+    folder: content
     create: true
+    nested: { depth: 100 } # accepts an optional summary template
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
       - label: Body
         name: body
         widget: markdown
+    meta: { path: { widget: string, label: 'Path', index_file: 'index' } }

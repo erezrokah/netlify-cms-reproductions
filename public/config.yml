@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
   branch: master
+  cms_label_prefix: 'test'
+  repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow
 media_folder: static/media
@@ -12,20 +14,6 @@ collections:
     folder: content/posts
     create: true
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown

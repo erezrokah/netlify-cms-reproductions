@@ -5,6 +5,7 @@ backend:
 publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
+local_backend: true
 collections:
   - name: posts
     label: Posts
@@ -12,20 +13,12 @@ collections:
     folder: content/posts
     create: true
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
+      - label: 'List'
+        name: 'list'
+        widget: 'list'
         required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+        min: 5
+        max: 10

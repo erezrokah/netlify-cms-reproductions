@@ -1,31 +1,35 @@
 backend:
-  name: git-gateway
-  branch: master
-
-publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+  name: test-repo
+load_config_file: 'false'
+display_url: https://netlify-cms-react-example.netlify.com
+media_folder: public/assets/uploads
+public_folder: '/assets/uploads'
 collections:
   - name: posts
     label: Posts
-    label_singular: 'Post'
-    folder: content/posts
-    create: true
-    fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
-      - label: Title
-        name: title
-        widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
-      - label: Publish Date
-        name: date
-        widget: datetime
-      - label: Body
-        name: body
-        widget: markdown
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: posts
+        label: Posts
+        file: _data/posts.yml
+        description: Author descriptions
+        fields:
+          - name: sectionsString
+            label: Sections String (no issue)
+            label_singular: Section
+            widget: list
+            fields:
+              - label: String
+                name: string
+                widget: string
+          - name: sectionsMd
+            label: Sections Markdown (has issue)
+            label_singular: Section
+            widget: list
+            fields:
+              - label: Markdown
+                name: markdown
+                widget: markdown
+                minimal: true

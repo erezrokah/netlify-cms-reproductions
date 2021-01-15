@@ -1,31 +1,705 @@
 backend:
   name: git-gateway
   branch: master
-
+  accept_roles:
+    - cms
+site_url: 'https://smashingmagazine.com/'
+display_url: 'https://www.smashingmagazine.com'
 publish_mode: editorial_workflow
-media_folder: static/media
-public_folder: /media
+integrations:
+  - provider: algolia
+    applicationID: 5RAJI8U6UH
+    apiKey: e4ef4cb6fd8b62b1e0d4b6e755ef7469
+    indexPrefix: cms
+    hooks:
+      - search
+      - listEntries
+    collections:
+      - articles
+      - authors
+  - provider: assetStore
+    getSignedFormURL: /asset-proxy/
+    shouldConfirmUpload: true
+    hooks:
+      - assetStore
+media_folder: site/static/images
+public_folder: site/images
+ebookFiles: &ref_0
+  - label: PDF
+    name: pdf
+    widget: file
+    private: true
+    required: false
+  - label: Mobi
+    name: mobi
+    widget: file
+    private: true
+    required: false
+  - label: ePub
+    name: epub
+    widget: file
+    private: true
+    required: false
 collections:
-  - name: posts
-    label: Posts
-    label_singular: 'Post'
-    folder: content/posts
+  - name: articles
+    label: Smashing Articles
+    folder: site/production-articles
+    sort: 'date:desc'
     create: true
+    slug: '{{fields.slug}}'
+    preview_path: '{{year}}/{{month}}/{{fields.slug}}'
     fields:
-      - label: Template
-        name: template
-        widget: hidden
-        default: post
       - label: Title
         name: title
         widget: string
-      - label: 'Cover Image'
-        name: 'image'
-        widget: 'image'
-        required: false
+      - label: Slug
+        name: slug
+        widget: string
+      - label: Author
+        name: author
+        widget: relation
+        collection: authors
+        searchFields:
+          - first_name
+          - last_name
+        valueField: title
+      - label: Image
+        name: image
+        widget: image
       - label: Publish Date
         name: date
         widget: datetime
+        format: 'YYYY-MM-DD hh:mm:ss'
+      - label: Quick Summary
+        name: summary
+        widget: markdown
+        required: false
+      - label: Excerpt
+        name: description
+        widget: markdown
+      - label: Store as Draft
+        name: draft
+        widget: boolean
+        required: false
+      - label: Disable Ads
+        name: disable_ads
+        widget: boolean
+        required: false
+      - label: Disable Panels
+        name: disable_panels
+        widget: boolean
+        required: false
+      - label: Disable Comments
+        name: disable_comments
+        widget: boolean
+        required: false
       - label: Body
         name: body
         widget: markdown
+      - label: Categories
+        name: categories
+        widget: list
+  - label: Categories
+    name: categories
+    folder: site/data/categories
+    preview_path: 'categories/{{title}}'
+    format: yaml
+    create: true
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: markdown
+      - label: Related
+        name: related
+        widget: list
+  - name: authors
+    label: Authors
+    folder: site/data/authors
+    create: true
+    slug: '{{slug}}'
+    preview_path: 'author/{{slug}}'
+    format: yaml
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: First Name
+        name: first_name
+        widget: string
+      - label: Last Name
+        name: last_name
+        widget: string
+      - label: Email
+        name: email
+        widget: string
+      - label: Image
+        name: image
+        widget: image
+        folder: site/static/images/authors
+      - label: Bio
+        name: bio
+        widget: markdown
+      - label: Website
+        name: www
+        widget: string
+        required: false
+      - label: Twitter
+        name: twitter
+        widget: string
+        required: false
+      - label: Github
+        name: github
+        widget: string
+        required: false
+      - label: Facebook
+        name: facebook
+        widget: string
+        required: false
+      - label: Linkedin
+        name: linkedin
+        widget: string
+        required: false
+      - label: Medium
+        name: medium
+        widget: string
+        required: false
+    card:
+      type: image
+      image: image
+      text: title
+      description: bio
+  - label: Jobs
+    name: jobs
+    folder: site/content/jobs
+    preview_path: 'jobs/{{slug}}'
+    extension: md
+    create: true
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Logo
+        name: logo
+        widget: image
+      - label: Description
+        name: description
+        widget: string
+      - label: Date
+        name: date
+        widget: datetime
+      - label: Company
+        name: company
+        widget: string
+      - label: Job-types
+        name: jobtypes
+        widget: list
+      - label: Body
+        name: body
+        widget: markdown
+      - label: Commitment
+        name: commitment
+        widget: select
+        options:
+          - full-time
+          - freelance
+      - label: Location
+        name: location
+        widget: string
+      - label: Remote
+        name: remote
+        widget: checkbox
+      - label: Featured
+        name: featured
+        widget: checkbox
+  - label: Printed Books
+    name: printed-books
+    folder: site/content/printed-books
+    slug: '{{title}}'
+    preview_path: 'printed-books/{{title}}'
+    create: true
+    extension: md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Short title
+        name: short_title
+        widget: string
+      - label: Subtitle
+        name: subtitle
+        widget: string
+      - label: SKU
+        name: sku
+        widget: string
+      - label: eBook SKU
+        name: ebook_sku
+        widget: string
+      - label: Author
+        name: author
+        widget: string
+        required: false
+      - label: Authors
+        name: authors
+        widget: string
+        required: false
+      - label: Published at
+        name: published_at
+        widget: string
+      - label: Tags
+        name: book_tags
+        widget: list
+      - label: Price
+        name: price
+        widget: book_price
+        fields:
+          - label: USD
+            name: usd
+          - label: EUR
+            name: eur
+          - label: USD
+            name: book_usd
+          - label: EUR
+            name: book_eur
+          - label: USD
+            name: ebook_usd
+          - label: EUR
+            name: ebook_eur
+      - label: Sales price
+        name: sales_price
+        widget: book_price
+        required: false
+        fields:
+          - label: USD
+            name: usd
+          - label: EUR
+            name: eur
+          - label: USD
+            name: book_usd
+          - label: EUR
+            name: book_eur
+          - label: USD
+            name: ebook_usd
+          - label: EUR
+            name: ebook_eur
+      - label: eBook price
+        name: ebook_price
+        widget: price
+        fields:
+          - label: USD
+            name: usd
+          - label: EUR
+            name: eur
+      - label: eBook sales price
+        name: ebook_sales_price
+        widget: price
+        required: false
+        fields:
+          - label: USD
+            name: usd
+          - label: EUR
+            name: eur
+      - label: Image
+        name: image
+        widget: image
+      - label: Secondary image
+        name: secondary_image
+        widget: image
+      - label: Testimonial
+        name: testimonial
+        widget: object
+        fields:
+          - label: Quote
+            name: quote
+            widget: text
+          - label: Name
+            name: name
+            widget: string
+          - label: Title
+            name: title
+            widget: string
+        required: false
+      - label: Technical details
+        name: technical_details
+        widget: list
+      - label: TOC
+        name: toc
+        widget: object
+        fields:
+          - label: Description
+            name: description
+            widget: string
+          - label: Chapters
+            name: chapters
+            widget: list
+            fields:
+              - label: Author
+                name: author
+                widget: string
+              - label: Chapter
+                name: chapter
+                widget: string
+              - label: Topics
+                name: topics
+                widget: list
+              - label: Description
+                name: description
+                widget: markdown
+      - label: SEO Description
+        name: description
+        widget: text
+      - label: Ebook Files
+        name: files
+        widget: object
+        fields: *ref_0
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+  - label: eBooks
+    name: ebooks
+    folder: site/content/ebooks
+    slug: '{{title}}'
+    preview_path: 'ebooks/{{title}}'
+    create: true
+    extension: md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Sku
+        name: sku
+        widget: string
+      - label: Image
+        name: image
+        widget: image
+      - label: SEO Description
+        name: description
+        widget: text
+      - label: Price
+        name: price
+        widget: price
+        fields:
+          - label: USD
+            name: usd
+          - label: EUR
+            name: eur
+      - label: Sales price
+        name: sales_price
+        widget: price
+        required: false
+        fields:
+          - label: USD
+            name: usd
+          - label: EUR
+            name: eur
+      - label: TOC
+        name: toc
+        widget: list
+        fields:
+          - label: Chapter
+            name: chapter
+            widget: string
+          - label: Author
+            name: author
+            widget: string
+            required: false
+          - label: Subject
+            name: subject
+            widget: string
+            required: false
+      - label: Pages
+        name: pages
+        widget: number
+      - label: Language
+        name: language
+        widget: string
+      - label: Published at
+        name: published_at
+        widget: string
+      - label: Publisher
+        name: publisher
+        widget: string
+        required: false
+      - label: ISBN
+        name: isbn
+        widget: string
+      - label: Files
+        name: files
+        widget: object
+        fields: *ref_0
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+  - label: Smashing TV Webinars
+    name: smashing-tv
+    folder: site/content/smashing-tv
+    slug: '{{slug}}'
+    preview_path: 'smashing-tv/{{slug}}'
+    create: true
+    extension: md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Subtitle
+        name: subtitle
+        widget: string
+      - label: Sku
+        name: sku
+        widget: string
+      - label: Speaker
+        name: speaker
+        widget: relation
+        collection: authors
+        searchFields:
+          - title
+          - first_name
+          - last_name
+        valueField: title
+        required: true
+      - label: Image
+        name: image
+        widget: image
+        required: true
+      - label: SEO Description
+        name: description
+        widget: text
+      - label: Price
+        name: price
+        widget: price
+        fields:
+          - label: USD
+            name: usd
+          - label: EUR
+            name: eur
+      - label: Sales price
+        name: sales_price
+        widget: price
+        required: false
+        fields:
+          - label: USD
+            name: usd
+          - label: EUR
+            name: eur
+      - label: Webinar Date
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD hh:mm:ss'
+      - label: Link
+        name: link
+        widget: string
+        required: false
+      - label: Password
+        name: password
+        widget: string
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+      - label: Recording Link
+        name: recording_link
+        widget: string
+        required: false
+      - label: Recording Password
+        name: recording_password
+        widget: string
+        required: false
+      - label: Link to slides
+        name: recording_slides
+        widget: string
+        required: false
+      - label: Recording duration (min)
+        name: recording_duration
+        widget: number
+        default: 2
+        valueType: int
+        min: 20
+        max: 200
+        step: 1
+        required: false
+  - label: Smashing TV Transcripts
+    name: transcripts
+    folder: site/content/transcripts/
+    slug: '{{slug}}'
+    preview_path: 'smashing-tv/transcripts/{{slug}}'
+    create: true
+    extension: md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Slug
+        name: slug
+        widget: string
+      - label: Webinar Date
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD hh:mm:ss'
+      - label: Speaker
+        name: speaker
+        widget: relation
+        collection: authors
+        searchFields:
+          - title
+          - first_name
+          - last_name
+        valueField: title
+        required: true
+      - label: Host
+        name: host
+        widget: relation
+        collection: authors
+        searchFields:
+          - title
+          - first_name
+          - last_name
+        valueField: title
+        required: false
+      - label: Description
+        name: description
+        widget: markdown
+      - label: Body
+        name: body
+        widget: markdown
+  - label: eBook Bundles
+    name: ebook-bundles
+    folder: site/content/ebook-bundles
+    slug: '{{title}}'
+    preview_path: 'ebook-bundles/{{title}}'
+    create: true
+    extension: md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: SKU
+        name: sku
+        widget: string
+      - label: Weight (decides list ordering)
+        name: weight
+        widget: number
+      - label: Image
+        name: image
+        widget: image
+      - label: SEO Description
+        name: description
+        widget: text
+      - label: eBooks
+        name: ebooks
+        widget: list
+        fields:
+          - label: eBook
+            name: sku
+            widget: relation
+            collection: ebooks
+            searchFields:
+              - title
+            valueField: sku
+      - label: Price
+        name: price
+        widget: price
+        fields:
+          - label: USD
+            name: usd
+          - label: EUR
+            name: eur
+      - label: Full Price (full value of the bundle)
+        name: full_price
+        widget: price
+        fields:
+          - label: USD
+            name: usd
+          - label: EUR
+            name: eur
+      - label: Pages
+        name: pages
+        widget: number
+        required: false
+      - label: Language
+        name: language
+        widget: string
+        required: false
+      - label: Published at
+        name: published_at
+        widget: string
+        required: false
+      - label: Publisher
+        name: publisher
+        widget: string
+        required: false
+      - label: ISBN
+        name: isbn
+        widget: string
+        required: false
+      - label: Files
+        name: files
+        widget: object
+        fields: *ref_0
+        required: false
+  - label: Pages
+    name: pages
+    folder: site/content/content-pages
+    create: true
+    extension: md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: 'URL (ie: /about/)'
+        name: url
+        widget: string
+      - label: Image
+        name: image
+        widget: image
+      - label: Publish Date
+        name: date
+        widget: datetime
+        format: 'YYYY-MM-DD hh:mm:ss'
+      - label: Description
+        name: description
+        widget: markdown
+      - label: Body
+        name: body
+        widget: markdown
+  - name: settings
+    label: Settings
+    files:
+      - name: curated
+        label: Curated
+        file: site/curated.yml
+        format: yaml
+        fields:
+          - label: Hot Topic
+            name: hot_topic
+            widget: string
+          - label: Front Page Categories
+            name: frontpage_categories
+            widget: list
+          - label: Featured Articles (path to file)
+            name: featured_articles
+            widget: list
+          - label: Popular Articles (path to file)
+            name: popular_articles
+            widget: list
+      - name: comments
+        label: Comments Settings
+        file: site/static/gotell/settings.json
+        format: json
+        fields:
+          - label: Banned IPs (Comma separated)
+            name: banned_ips
+            widget: list
+          - label: Banned Keywords (Comma separated)
+            name: banned_keywords
+            widget: list
+          - label: Banned Emails (Comma separated)
+            name: banned_emails
+            widget: list
+          - label: Cut off time in seconds (when to stop accepting new comments)
+            name: timelimit
+            widget: number
+            valueType: int

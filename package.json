@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "sed -i s/NETLIFY_API_TOKEN/${NETLIFY_API_TOKEN}/g netlify.toml",
+    "build": "echo 'no op'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Erez Rokah",
@@ -27,5 +27,11 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "dependencies": {
+    "@vendia/serverless-express": "^4.0.0-rc.7",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.6",
+    "node-fetch": "^2.6.1"
   }
 }

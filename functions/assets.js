@@ -21,7 +21,13 @@ exports.handler = async (event, context) => {
   console.log(event);
   const { identity, user } = context.clientContext;
 
-  console.log(user, identity);
+  const roles = user && user.app_metadata && user.app_metadata.roles;
+  if (!Array.isArray(roles) || !roles.includes('admin')) {
+    return {
+      statusCode: 401,
+      body: 'Unauthorized',
+    };
+  }
 
   try {
     const res = await fetch(apiUrl, {

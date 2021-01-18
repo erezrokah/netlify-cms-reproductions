@@ -1,10 +1,11 @@
 [[redirects]]
   from = "/asset-proxy/*"
-  to = "https://api.netlify.com/api/v1/sites/ae146f89-c18b-46ea-9f03-967c2203b17d/assets/:splat"
-  status = 200
-  force = true
-  headers = { Authorization = "Bearer NETLIFY_API_TOKEN"}
-  conditions = {Role = ["admin"]}
+  to = ".netlify/functions/assets/:splat"
+  status = 302
 
 [build]
  command = "npm run build"
+ functions = "functions"
+
+ [build.environment]
+    NODE_VERSION = "12"

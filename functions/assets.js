@@ -1,45 +1,52 @@
 const express = require('express');
 const serverlessExpress = require('@vendia/serverless-express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const fetch = require('node-fetch');
 
 const apiToken = process.env.NETLIFY_API_TOKEN;
-const apiUrl = process.env.API_URL;
+const apiHost = process.env.API_HOST;
+const apiPath = process.env.API_PATH;
+
+const cors = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+  'Access-Control-Allow-Credentials': true,
+};
 
 const apiProxy = createProxyMiddleware({
-  target: apiUrl,
+  target: apiHost,
   changeOrigin: true,
-  headers: { Authorization: `Bearer: ${apiToken}` },
+  headers: {
+    ...cors,
+    Authorization: `Bearer ${apiToken}`,
+  },
+  pathRewrite: {
+    '^/.netlify/functions/assets': apiPath,
+  },
 });
 
 const app = express();
-app.use('/*', apiProxy);
+app.use(apiProxy);
 
 const handler = serverlessExpress({ app }).handler;
 
-exports.handler = async (event, context) => {
+exports.handler = async (event, context, callback) => {
   console.log(event);
-  const { identity, user } = context.clientContext;
 
-  const roles = user && user.app_metadata && user.app_metadata.roles;
-  if (!Array.isArray(roles) || !roles.includes('admin')) {
-    return {
-      statusCode: 401,
-      body: 'Unauthorized',
-    };
+  if (event.httpMethod !== 'OPTIONS') {
+    const { user } = context.clientContext;
+    const roles = user && user.app_metadata && user.app_metadata.roles;
+    if (!Array.isArray(roles) || !roles.includes('admin')) {
+      return {
+        statusCode: 401,
+        body: 'Unauthorized',
+        headers: { ...cors },
+      };
+    }
   }
 
-  try {
-    const res = await fetch(apiUrl, {
-      headers: { Authorization: `Bearer ${apiToken}` },
-    });
-    const text = await res.text();
-    return {
-      statusCode: res.status,
-      body: text,
-    };
-  } catch (error) {
-    console.log(error);
-    return { statusCode: 500, body: 'Unknown error' };
-  }
+  return handler(
+    { ...event, requestContext: { stage: 'prod' } },
+    context,
+    callback,
+  );
 };

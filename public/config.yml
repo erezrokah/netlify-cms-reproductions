@@ -6,6 +6,7 @@ backend:
 site_url: 'https://smashingmagazine.com/'
 display_url: 'https://www.smashingmagazine.com'
 publish_mode: editorial_workflow
+local_backend: true
 integrations:
   - provider: algolia
     applicationID: 5RAJI8U6UH

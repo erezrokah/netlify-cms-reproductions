@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: master
+  branch: netlify_cms/asset_store
   accept_roles:
     - cms
 site_url: 'https://smashingmagazine.com/'

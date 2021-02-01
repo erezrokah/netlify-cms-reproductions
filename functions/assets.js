@@ -12,6 +12,8 @@ const cors = {
   'Access-Control-Allow-Credentials': true,
 };
 
+console.log({ apiHost, apiPath });
+
 const apiProxy = createProxyMiddleware({
   target: apiHost,
   changeOrigin: true,

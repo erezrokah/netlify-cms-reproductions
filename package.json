@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build" : "echo no-op",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "echo no-op",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "husky install",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable"
   },
   "author": "Erez Rokah",
   "license": "MIT",
@@ -21,11 +24,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "husky": "^5.0.0",
+    "pinst": "^2.1.4",
     "prettier": "^2.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   }
 }

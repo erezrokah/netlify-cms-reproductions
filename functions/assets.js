@@ -8,6 +8,7 @@ const apiPath = process.env.API_PATH;
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': '*',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
   'Access-Control-Allow-Credentials': true,
 };
@@ -34,16 +35,18 @@ const handler = serverlessExpress({ app }).handler;
 exports.handler = async (event, context, callback) => {
   console.log(event);
 
-  if (event.httpMethod !== 'OPTIONS') {
-    const { user } = context.clientContext;
-    const roles = user && user.app_metadata && user.app_metadata.roles;
-    if (!Array.isArray(roles) || !roles.includes('admin')) {
-      return {
-        statusCode: 401,
-        body: 'Unauthorized',
-        headers: { ...cors },
-      };
-    }
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers: { ...cors } };
+  }
+
+  const { user } = context.clientContext;
+  const roles = user && user.app_metadata && user.app_metadata.roles;
+  if (!Array.isArray(roles) || !roles.includes('admin')) {
+    return {
+      statusCode: 401,
+      body: 'Unauthorized',
+      headers: { ...cors },
+    };
   }
 
   return handler(

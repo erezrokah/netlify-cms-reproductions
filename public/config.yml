@@ -1,6 +1,6 @@
 backend:
   name: github
-  branch: feat/nested_media_dirs
+  branch: netlify_cms/pr_4670
   repo: erezrokah/netlify-cms-reproductions
 
 publish_mode: editorial_workflow

@@ -17,12 +17,12 @@
   integrity sha512-Ed61U6XJc3CVRfkERJWDz4dJwKe7iLmmJsbOGu9wSloNSFttHV0I8g6UAgb7qnK5ly5bGLPd4oXZlxCdANBOWQ==
 
 "@commitlint/cli@^19.0.0":
-  version "19.6.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-19.6.1.tgz#24edd26595d911cc6b680cdfbb1fb083bfd5f73d"
-  integrity sha512-8hcyA6ZoHwWXC76BoC8qVOSr8xHy00LZhZpauiD0iO0VYbVhMnED0da85lTfIULxl7Lj4c6vZgF0Wu/ed1+jlQ==
+  version "19.7.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-19.7.1.tgz#aca351ae6200af58b49de58181319015e7429601"
+  integrity sha512-iObGjR1tE/PfDtDTEfd+tnRkB3/HJzpQqRTyofS2MPPkDn1mp3DBC8SoPDayokfAy+xKhF8+bwRCJO25Nea0YQ==
   dependencies:
     "@commitlint/format" "^19.5.0"
-    "@commitlint/lint" "^19.6.0"
+    "@commitlint/lint" "^19.7.1"
     "@commitlint/load" "^19.6.1"
     "@commitlint/read" "^19.5.0"
     "@commitlint/types" "^19.5.0"
@@ -30,9 +30,9 @@
     yargs "^17.0.0"
 
 "@commitlint/config-conventional@^19.0.0":
-  version "19.6.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-19.6.0.tgz#badba72c8639ea79291e2941001bd7ea7fad3a2c"
-  integrity sha512-DJT40iMnTYtBtUfw9ApbsLZFke1zKh6llITVJ+x9mtpHD08gsNXaIRqHTmwTZL3dNX5+WoyK7pCN/5zswvkBCQ==
+  version "19.7.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-19.7.1.tgz#9119a02ec8e0f4ac88f035e37dc333e7f69ace1c"
+  integrity sha512-fsEIF8zgiI/FIWSnykdQNj/0JE4av08MudLTyYHm4FlLWemKoQvPNUYU2M/3tktWcCEyq7aOkDDgtjrmgWFbvg==
   dependencies:
     "@commitlint/types" "^19.5.0"
     conventional-changelog-conventionalcommits "^7.0.2"
@@ -70,20 +70,20 @@
     "@commitlint/types" "^19.5.0"
     chalk "^5.3.0"
 
-"@commitlint/is-ignored@^19.6.0":
-  version "19.6.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/is-ignored/-/is-ignored-19.6.0.tgz#6adb9097d36b68e00b9c06a73d7a08e9f54c54dc"
-  integrity sha512-Ov6iBgxJQFR9koOupDPHvcHU9keFupDgtB3lObdEZDroiG4jj1rzky60fbQozFKVYRTUdrBGICHG0YVmRuAJmw==
+"@commitlint/is-ignored@^19.7.1":
+  version "19.7.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/is-ignored/-/is-ignored-19.7.1.tgz#d3d713d97df4da5d0a6440624d0db38e3a67494e"
+  integrity sha512-3IaOc6HVg2hAoGleRK3r9vL9zZ3XY0rf1RsUf6jdQLuaD46ZHnXBiOPTyQ004C4IvYjSWqJwlh0/u2P73aIE3g==
   dependencies:
     "@commitlint/types" "^19.5.0"
     semver "^7.6.0"
 
-"@commitlint/lint@^19.6.0":
-  version "19.6.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-19.6.0.tgz#f9fc9b11b808c96bd3f85e882e056daabac40c36"
-  integrity sha512-LRo7zDkXtcIrpco9RnfhOKeg8PAnE3oDDoalnrVU/EVaKHYBWYL1DlRR7+3AWn0JiBqD8yKOfetVxJGdEtZ0tg==
+"@commitlint/lint@^19.7.1":
+  version "19.7.1"
+  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-19.7.1.tgz#a180d5695fc5328b8566a482750df7fbf72b11c5"
+  integrity sha512-LhcPfVjcOcOZA7LEuBBeO00o3MeZa+tWrX9Xyl1r9PMd5FWsEoZI9IgnGqTKZ0lZt5pO3ZlstgnRyY1CJJc9Xg==
   dependencies:
-    "@commitlint/is-ignored" "^19.6.0"
+    "@commitlint/is-ignored" "^19.7.1"
     "@commitlint/parse" "^19.5.0"
     "@commitlint/rules" "^19.6.0"
     "@commitlint/types" "^19.5.0"
@@ -179,9 +179,9 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "22.10.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.10.10.tgz#85fe89f8bf459dc57dfef1689bd5b52ad1af07e6"
-  integrity sha512-X47y/mPNzxviAGY5TcYPtYL8JsY3kAq2n8fMmKoRCxq/c4v4pyGNCzM2R6+M5/umG4ZfHuT+sgqDYqWc9rJ6ww==
+  version "22.13.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.4.tgz#3fe454d77cd4a2d73c214008b3e331bfaaf5038a"
+  integrity sha512-ywP2X0DYtX3y08eFVx5fNIw7/uIv8hYUKgXoK8oayJlLnKcRfEYCxWMVE1XagUdVtCJlZT1AU4LXEABW+L1Peg==
   dependencies:
     undici-types "~6.20.0"
 
@@ -385,9 +385,9 @@ husky@^9.0.0:
   integrity sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==
 
 import-fresh@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-3.3.0.tgz#37162c25fcb9ebaa2e6e53d5b4d88ce17d9e0c2b"
-  integrity sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-3.3.1.tgz#9cecb56503c0ada1f2741dbbd6546e4b13b57ccf"
+  integrity sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==
   dependencies:
     parent-module "^1.0.0"
     resolve-from "^4.0.0"
@@ -595,9 +595,9 @@ resolve-from@^5.0.0:
   integrity sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
 
 semver@^7.6.0:
-  version "7.6.3"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.6.3.tgz#980f7b5550bc175fb4dc09403085627f9eb33143"
-  integrity sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==
+  version "7.7.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.1.tgz#abd5098d82b18c6c81f6074ff2647fd3e7220c9f"
+  integrity sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==
 
 split2@^4.0.0:
   version "4.2.0"
